@@ -13,10 +13,9 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
-    cgpa = data["cgpa"]
-    iq = data["iq"]
+    cgpa = float(data["cgpa"])
+    iq = float(data["iq"])
 
-    # Model expects input as [[cgpa, iq]]
     prediction = model.predict([[cgpa, iq]])[0]
 
     return jsonify({"placement_prediction": int(prediction)})
